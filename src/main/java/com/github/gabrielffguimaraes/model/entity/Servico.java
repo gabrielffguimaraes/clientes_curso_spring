@@ -21,5 +21,4 @@ public class Servico {
 
     @Column
     private BigDecimal valor;
-
 }
