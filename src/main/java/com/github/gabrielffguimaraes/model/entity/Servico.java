@@ -1,9 +1,11 @@
 package com.github.gabrielffguimaraes.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -21,4 +23,13 @@ public class Servico {
 
     @Column
     private BigDecimal valor;
+
+    @Column(name="data_cadastro" ,updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataCadastro;
+
+    @PrePersist
+    public void prePersist(){
+        setDataCadastro(LocalDate.now());
+    }
 }

@@ -1,17 +1,24 @@
-<h1 class="mt-4">Clientes</h1>
+<h1 class="mt-4">
+  <i *ngIf="!id" class="fas fa-user-plus"></i>
+  <i *ngIf="id" class="fas fa-user-edit"></i>
+  Clientes
+</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active" style="width: 100%">
-    	Cadastro
+      {{(id)?"Edição":"Cadastro"}}
     </li>
 </ol>
 <div class="container">
 	<form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
 		<div class="row">
 			<div class="col-md-12">
-				<div *ngIf="sucesso==true" class="alert alert-success" role="alert">
-				     Usuário salvo com sucesso
+				<div *ngIf="sucesso==true && !id" class="alert alert-success" role="alert">
+            Usuário adicionado com sucesso
 				</div>
-				<div *ngFor="let error of errors" class="alert alert-danger" role="alert">
+        <div *ngIf="sucesso==true && id" class="alert alert-success" role="alert">
+            Usuário editado com sucesso
+        </div>
+        <div *ngFor="let error of errors" class="alert alert-danger" role="alert">
 				     {{error}}
 				</div>
 			</div>
@@ -46,8 +53,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-success pl-4 pr-4 mr-2"><i class="far fa-save"></i> Salvar</button>
-				<button class="btn btn-danger text-white pl-4 pr-4" (click)="navigate('/clientes')"><i class="fas fa-arrow-left"></i> Voltar</button>
+				<button *ngIf="!id" class="btn btn-success pl-4 pr-4 mr-2"><i class="far fa-plus-square"></i> Adicionar Cliente</button>
+        <button *ngIf="id" class="btn btn-success pl-4 pr-4 mr-2"><i class="fas fa-sync"></i> Editar Cliente</button>
+        <button class="btn btn-danger text-white pl-4 pr-4" (click)="navigate('/clientes')"><i class="fas fa-arrow-left"></i> Voltar</button>
 			</div>
 		</div>
 	</form>

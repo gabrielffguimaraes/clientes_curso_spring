@@ -2,6 +2,7 @@ package com.github.gabrielffguimaraes.rest;
 import com.github.gabrielffguimaraes.model.entity.Cliente;
 import com.github.gabrielffguimaraes.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,7 +28,6 @@ public class ClienteController {
         cliente.setId(null);
         return repository.save(cliente);
     }
-
     @GetMapping
     public List<Cliente> obterTodos(){
         return repository.findAll();

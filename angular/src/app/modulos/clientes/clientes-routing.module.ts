@@ -4,8 +4,10 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { ClienteListaComponent } from './cliente-lista/cliente-lista.component';
 
 const routes: Routes = [
-	{path: 'clientes-form' , component:ClienteFormComponent},
-	{path: 'clientes' , component:ClienteListaComponent},
+  // tslint:disable-next-line:indent
+	{path: 'clientes-form' , component: ClienteFormComponent},
+  {path: 'clientes-form/:id' , component: ClienteFormComponent},
+	{path: 'clientes' , component: ClienteListaComponent},
 ];
 
 @NgModule({
