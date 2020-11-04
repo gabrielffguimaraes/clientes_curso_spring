@@ -7,8 +7,8 @@ import { ClientesModule } from './modulos/clientes/clientes.module';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
-
+import { HttpClientModule } from '@angular/common/http';
+import { ServicosModule } from './modulos/servicos/servicos.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +20,10 @@ import { HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     TemplateModule,
     ClientesModule,
-    HttpClientModule
+    HttpClientModule,
+    ServicosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

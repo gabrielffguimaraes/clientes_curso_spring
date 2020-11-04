@@ -15,9 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/servicos")
+@CrossOrigin("*")
 public class ServicoController {
     @Autowired
     private ClienteRepository clienteRepository;
@@ -39,5 +41,14 @@ public class ServicoController {
         System.out.println(servicoDTO.getPreco());
         servico.setValor(bigDecimalConverter.converter(servicoDTO.getPreco()));
         return servicoRepository.save(servico);
+    }
+
+    @GetMapping
+    public List<Servico> pesquisar(
+            @RequestParam(value = "nome",required = false,defaultValue = "") String nome,
+            @RequestParam(value = "mes",required = false) Integer mes
+    ){
+        List<Servico> lista = null;
+       return this.servicoRepository.pesquisar("%"+nome+"%",mes);
     }
 }
