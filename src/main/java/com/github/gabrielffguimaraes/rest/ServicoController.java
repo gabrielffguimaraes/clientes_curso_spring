@@ -38,8 +38,8 @@ public class ServicoController {
                 .findById(servicoDTO.getIdCliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado ."));
         servico.setCliente(cliente);
-        System.out.println(servicoDTO.getPreco());
-        servico.setValor(bigDecimalConverter.converter(servicoDTO.getPreco()));
+        System.out.println(servicoDTO.getValor());
+        servico.setValor(bigDecimalConverter.converter(servicoDTO.getValor()));
         return servicoRepository.save(servico);
     }
 

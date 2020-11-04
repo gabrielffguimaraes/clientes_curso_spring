@@ -5,22 +5,50 @@
     </li>
 </ol>
 <div class="container">
+  <div class="row">
+    <div *ngIf="sucesso" class="col-md-12">
+      <div class="alert alert-success" role="alert">
+          {{sucesso}}
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div *ngFor="let erro of errors" class="alert alert-danger" role="alert">
+        {{erro}}
+      </div>
+    </div>
+  </div>
 	<form #servicoForm="ngForm" (submit)="onSubmit()">
-		<div class="row">
+		<div class="row mb-2">
 			<div class="col-md-12">
 				<label> Cliente: </label>
-				<select 
-				(change)="setCliente(this)"
-				([ngModel])="servico.idCliente"  
-				class="form-control">
-					<option value=""> Selecione um Cliente</option> 
-					<option *ngFor="let cliente of clientes" value="cliente.id">
-						{{cliente.nome}}
+				<select
+            class="form-control"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="servico.idCliente">
+					<option value=""> Selecione um Cliente</option>
+					<option *ngFor="let cliente of clientes" value="{{cliente.id}}  ">
+						{{ cliente.nome }}
 					</option>
 				</select>
 			</div>
 		</div>
-		<div class="row">
+    <div class="row mb-2">
+      <div class="col-md-12">
+        <label> Descrição : </label>
+        <input class="form-control" type="text" [(ngModel)]="servico.descricao" name="descricao" >
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label> Valor : </label>
+        <input class="form-control" type="number" [(ngModel)]="servico.valor" name="valor" >
+      </div>
+      <div class="col-md-6">
+        <label> Data Cadastro : </label>
+        <input class="form-control" type="date" [(ngModel)]="servico.dataCadastro" name="data_cadastro" >
+      </div>
+    </div>
+		<div class="row mb-4">
 			<div class="col-md-12">
 				<button type="submit" class="btn btn-success">Adicionar Serviço</button>
 			</div>

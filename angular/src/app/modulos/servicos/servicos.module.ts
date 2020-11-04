@@ -1,27 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ServicosRoutingModule } from './servicos-routing.module';
 import { ServicosFormComponent } from './servicos-form/servicos-form.component';
 import { ServicosListaComponent } from './servicos-lista/servicos-lista.component';
-
+import { ServicosService} from "../../servicos/servicos.service";
 
 @NgModule({
   declarations: [
     ServicosFormComponent,
     ServicosListaComponent
   ],
-  imports: [ 
+  imports: [
     CommonModule,
     ServicosRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
   	ServicosFormComponent ,
   	ServicosListaComponent
+  ],
+  providers: [
+    ServicosService
   ]
 })
 export class ServicosModule {}

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ServicoDTO {
     private String descricao;
-    private String preco;
+    private String valor;
     private String data;
     private Integer idCliente;
 }

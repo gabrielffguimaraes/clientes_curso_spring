@@ -22,7 +22,7 @@ public class ClientesApplication {
     public CommandLineRunner run(@Autowired ClienteRepository repository){
         return args -> {
             Cliente cliente = new Cliente().builder().cpf("24695549182").nome("fulano").build();
-            repository.save(cliente);
+            //repository.save(cliente);
         };
     }
     @GetMapping("/hello")
