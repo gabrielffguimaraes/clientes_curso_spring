@@ -1,6 +1,6 @@
 export class Servico {
 	descricao: string;
 	valor: string;
-	dataCadastro : string;
+	data : string;
 	idCliente : number;
 }

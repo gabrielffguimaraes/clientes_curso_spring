@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +31,7 @@ public class ServicoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Servico adicionarServico(@RequestBody ServicoDTO servicoDTO){
+    public Servico adicionarServico(@RequestBody @Valid ServicoDTO servicoDTO){
         Servico servico = new Servico();
         servico.setDescricao(servicoDTO.getDescricao());
         //servico.setDataCadastro(LocalDate.parse(servicoDTO.getData(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -42,13 +43,16 @@ public class ServicoController {
         servico.setValor(bigDecimalConverter.converter(servicoDTO.getValor()));
         return servicoRepository.save(servico);
     }
-
     @GetMapping
-    public List<Servico> pesquisar(
-            @RequestParam(value = "nome",required = false,defaultValue = "") String nome,
-            @RequestParam(value = "mes",required = false) Integer mes
+    public List<Servico> obterTodos(){
+        return servicoRepository.findAll();
+    }
+    @GetMapping("/pesquisar")
+    public List<Servico> pesquisar (
+        @RequestParam(value = "nome",required = false,defaultValue = "") String nome,
+        @RequestParam(value = "mes",required = false) Integer mes
     ){
-        List<Servico> lista = null;
+       List<Servico> lista = null;
        return this.servicoRepository.pesquisar("%"+nome+"%",mes);
     }
 }

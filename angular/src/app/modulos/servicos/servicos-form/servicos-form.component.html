@@ -45,12 +45,13 @@
       </div>
       <div class="col-md-6">
         <label> Data Cadastro : </label>
-        <input class="form-control" type="date" [(ngModel)]="servico.dataCadastro" name="data_cadastro" >
+        <input class="form-control" type="date" [(ngModel)]="servico.data" name="data_cadastro" >
       </div>
     </div>
 		<div class="row mb-4">
 			<div class="col-md-12">
 				<button type="submit" class="btn btn-success">Adicionar Serviço</button>
+        <button class="btn btn-danger text-white pl-4 pr-4 ml-4" (click)="navigate('/servicos')"><i class="fas fa-arrow-left"></i> Voltar</button>
 			</div>
 		</div>
 	</form>

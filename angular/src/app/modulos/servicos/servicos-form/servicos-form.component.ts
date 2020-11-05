@@ -3,6 +3,7 @@ import { ClienteService } from '../../../servicos/cliente.service';
 import { ServicosService } from '../../../servicos/servicos.service';
 import { Cliente } from '../../clientes/cliente';
 import { Servico } from '../servico';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-servicos-form',
   templateUrl: './servicos-form.component.html',
@@ -14,7 +15,7 @@ export class ServicosFormComponent implements OnInit {
   servico: Servico;
   clientes: Cliente[] = [];
   idSelecionado: number;
-  constructor(private clienteService:ClienteService,private servicosService:ServicosService) {
+  constructor(private _router: Router,private clienteService:ClienteService,private servicosService:ServicosService) {
     this.servico = new Servico();
   }
   ngOnInit(): void {
@@ -30,8 +31,12 @@ export class ServicosFormComponent implements OnInit {
        .salvar(this.servico)
        .subscribe( response => {
            this.sucesso = "Sucesso ao adicionar Serviço !";
+           this.servico = new Servico();
        }, errors => {
            this.errors = errors.error.errors ;
        });
+  }
+  public navigate(url):void{
+    this._router.navigate([url]);
   }
 }
