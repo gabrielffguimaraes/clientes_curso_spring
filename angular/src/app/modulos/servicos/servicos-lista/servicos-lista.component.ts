@@ -14,6 +14,7 @@ export class ServicosListaComponent implements OnInit {
   mes: number;
   meses: number[] = [0,1,2,3,4,5,6,7,8,9,10,11];
   mesesDescricao: string[] = [
+    "Selecione ...",
     "Janeiro",
     "Fevereiro",
     "Março",
@@ -39,7 +40,7 @@ export class ServicosListaComponent implements OnInit {
   public pesquisar(): void{
     this.msg = false;
     this.servicosService
-      .getServicos(this.nome,(this.mes+1),"/pesquisar")
+      .getServicos(this.nome,this.mes,"/pesquisar")
       .subscribe(servicos => {
         this.msg = (servicos.length <= 0)? true : false;
         this.servicos = servicos;

@@ -21,4 +21,7 @@ export class ServicosService {
     let url = `${this.apiUrl}/api/servicos${flag}?`+httpParams.toString();
     return this.http.get<any>(url);
   }
+  public getServicoByID(id:number) : Observable<any>{
+     return this.http.get<any>(`${this.apiUrl}/api/servicos/${id}`);
+  }
 }

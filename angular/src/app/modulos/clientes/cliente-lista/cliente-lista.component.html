@@ -16,7 +16,7 @@
 </div>
 <div class="row">
 	<div class="col-md-2">
-		<button (click)="navigate('./clientes-form')" class="btn btn-warning" style="color:white">
+		<button (click)="navigate('./sistema/clientes/form')" class="btn btn-warning" style="color:white">
 			<i class="fa fa-plus"></i> Novo
 		</button>
 	</div>
@@ -41,7 +41,7 @@
               <td>{{cliente.cpf}}</td>
               <td>{{cliente.dataCadastro}}</td>
               <td style="width: 125px">
-                <button routerLink="/clientes-form/{{cliente.id}}" class="btn btn-primary m-1">
+                <button routerLink="/sistema/clientes/form/{{cliente.id}}" class="btn btn-primary m-1">
                    <i class="far fa-edit"></i>
                 </button>
                 <button class="btn btn-primary m-1" (click)="clienteSelecionado=cliente" data-toggle="modal" data-target="#modal-delecao">

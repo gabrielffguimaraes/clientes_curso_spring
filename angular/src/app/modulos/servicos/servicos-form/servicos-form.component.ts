@@ -3,7 +3,9 @@ import { ClienteService } from '../../../servicos/cliente.service';
 import { ServicosService } from '../../../servicos/servicos.service';
 import { Cliente } from '../../clientes/cliente';
 import { Servico } from '../servico';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
+import { UtilComponent} from '../../../util/util.component';
+
 @Component({
   selector: 'app-servicos-form',
   templateUrl: './servicos-form.component.html',
@@ -15,14 +17,31 @@ export class ServicosFormComponent implements OnInit {
   servico: Servico;
   clientes: Cliente[] = [];
   idSelecionado: number;
-  constructor(private _router: Router,private clienteService:ClienteService,private servicosService:ServicosService) {
+  id:number;
+  util:UtilComponent;
+  constructor(private activateRoute:ActivatedRoute,private _router: Router,private clienteService:ClienteService,private servicosService:ServicosService) {
     this.servico = new Servico();
   }
   ngOnInit(): void {
+      this.util = new UtilComponent();
+      this.activateRoute
+        .params
+        .subscribe(params => {
+          //PAREI AQUI EDITAR SERVIÇO.
+          if(params['id'])
+          this.id = params['id'];
+          this.servicosService
+            .getServicoByID(this.id)
+            .subscribe(servico => {
+               this.servico.descricao = servico.descricao;
+               this.servico.idCliente = servico.cliente.id;
+               this.servico.valor = servico.valor;
+               this.servico.data = this.util.convertData(servico.dataCadastro,"yyyy-MM-dd");
+            })
+      })
   	  this.clienteService.getClientes()
   	  .subscribe( clientes => {
   	  	 this.clientes = clientes;
-  	  	 console.log(this.clientes)
   	  })
   }
 
@@ -36,6 +55,7 @@ export class ServicosFormComponent implements OnInit {
            this.errors = errors.error.errors ;
        });
   }
+
   public navigate(url):void{
     this._router.navigate([url]);
   }

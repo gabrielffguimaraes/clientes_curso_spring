@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './modulos/template/home/home.component';
 
 import { TemplateModule } from './modulos/template/template.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,19 +9,27 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicosModule } from './modulos/servicos/servicos.module';
+import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { SistemaComponent } from './pages/sistema/sistema.component';
+import { UtilComponent } from './util/util.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    SistemaComponent,
+    UtilComponent
   ],
   imports: [
     BrowserModule,
-    BrowserModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     TemplateModule,
     ClientesModule,
-    HttpClientModule,
-    ServicosModule
+    ServicosModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

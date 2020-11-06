@@ -1,7 +1,12 @@
 <h1 class="mt-4"><i class="fas fa-toolbox"></i> Serviços</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active" style="width: 100%">
-    	<i class="far fa-plus-square"></i> Cadastro
+      <span *ngIf="!id">
+        <i class="far fa-plus-square"></i> Cadastro
+      </span>
+      <span *ngIf="id">
+        <i class="fas fa-pen-square"></i> Edição
+      </span>
     </li>
 </ol>
 <div class="container">
@@ -18,6 +23,12 @@
     </div>
   </div>
 	<form #servicoForm="ngForm" (submit)="onSubmit()">
+    <div class="row mb-2">
+      <div class="col-3" *ngIf="id">
+        <label> ID : </label>
+        <input disabled="true" style="width:55px;text-align: center" class="form-control align-content-center" type="text" [(ngModel)]="id" name="id" >
+      </div>
+    </div>
 		<div class="row mb-2">
 			<div class="col-md-12">
 				<label> Cliente: </label>
@@ -25,8 +36,8 @@
             class="form-control"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="servico.idCliente">
-					<option value=""> Selecione um Cliente</option>
-					<option *ngFor="let cliente of clientes" value="{{cliente.id}}  ">
+					<option value=""> Selecione um Cliente </option>
+					<option *ngFor="let cliente of clientes" value="{{cliente.id}}">
 						{{ cliente.nome }}
 					</option>
 				</select>
@@ -50,8 +61,15 @@
     </div>
 		<div class="row mb-4">
 			<div class="col-md-12">
-				<button type="submit" class="btn btn-success">Adicionar Serviço</button>
-        <button class="btn btn-danger text-white pl-4 pr-4 ml-4" (click)="navigate('/servicos')"><i class="fas fa-arrow-left"></i> Voltar</button>
+				<button type="submit" class="btn btn-success">
+          <span *ngIf="!id">
+             <i class="fas fa-plus"></i> Adicionar Serviço
+          </span>
+          <span *ngIf="id">
+             <i class="far fa-edit"></i> Editar Serviço
+          </span>
+        </button>
+        <button class="btn btn-danger text-white pl-4 pr-4 ml-4" (click)="navigate('/sistema/servicos')"><i class="fas fa-arrow-left"></i> Voltar</button>
 			</div>
 		</div>
 	</form>

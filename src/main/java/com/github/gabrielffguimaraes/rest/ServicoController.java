@@ -8,6 +8,7 @@ import com.github.gabrielffguimaraes.rest.dto.ServicoDTO;
 import com.github.gabrielffguimaraes.util.BigDecimalConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -43,16 +44,23 @@ public class ServicoController {
         servico.setValor(bigDecimalConverter.converter(servicoDTO.getValor()));
         return servicoRepository.save(servico);
     }
+    @GetMapping("{id}")
+    public Servico obterPorId(@PathVariable("id") Integer id){
+        return servicoRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Serviço não encontrado ."));
+    }
+
     @GetMapping
     public List<Servico> obterTodos(){
         return servicoRepository.findAll();
     }
+
     @GetMapping("/pesquisar")
     public List<Servico> pesquisar (
         @RequestParam(value = "nome",required = false,defaultValue = "") String nome,
-        @RequestParam(value = "mes",required = false) Integer mes
+        @RequestParam(value = "mes",required = false,defaultValue = "") String mes
     ){
-       List<Servico> lista = null;
        return this.servicoRepository.pesquisar("%"+nome+"%",mes);
     }
 }

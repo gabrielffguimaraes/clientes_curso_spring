@@ -13,8 +13,10 @@ import java.util.List;
 // CLASSE PARA CONFIGURAÇÃO DO CROSS ORIGIN NÃO ESTÁ FUNCIONANDO.
 //@Configuration
 public class WebConfig {
+    /*
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean(){
+
         List<String> All = Arrays.asList("*");
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -26,11 +28,11 @@ public class WebConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",corsConfiguration);
 
-        //CorsFilter corsFilter = new CorsFilter(source);  Linha de acordo com o curso .
-        CorsFilter corsFilter = new CorsFilter(); //linha errada
+        CorsFilter corsFilter = new CorsFilter(source);  Linha de acordo com o curso .
         FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>(corsFilter);
         filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
         return filter;
     }
+    */
 }

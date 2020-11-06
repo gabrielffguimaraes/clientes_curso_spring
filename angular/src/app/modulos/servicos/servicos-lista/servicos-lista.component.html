@@ -8,7 +8,6 @@
             </div>
             <div class="col-12 mb-2  mb-md-0 col-md-2">
               <select type="text" [(ngModel)]="mes" name="mes" class="form-control">
-                 <option value="" selected>Selecione...</option>
                  <option *ngFor="let mes of meses" [ngValue]="mes">{{mesesDescricao[mes]}}</option>
               </select>
             </div>
@@ -24,7 +23,7 @@
 </ol>
 <div class="row mb-4">
 	<div class="col-md-2">
-		<button routerLink="/servicos-form" class="btn btn-warning" style="color:white">
+		<button routerLink="/sistema/servicos/form" class="btn btn-warning" style="color:white">
 			<i class="fa fa-plus"></i> Novo
 		</button>
 	</div>
@@ -52,12 +51,12 @@
               <td>{{servico.cliente.nome}}</td>
               <td>{{servico.dataCadastro}}</td>
               <td style="width: 125px">
-                <button routerLink="/clientes-form/{{servico.id}}" class="btn btn-primary m-1">
-                  <i class="far fa-edit"></i>
-                </button>
-                <button class="btn btn-primary m-1"  data-toggle="modal" data-target="#modal-delecao">
-                  <i class="fas fa-trash"></i>
-                </button>
+                  <button routerLink="/sistema/servicos/form/{{servico.id}}" class="btn btn-primary m-1">
+                    <i class="far fa-edit"></i>
+                  </button>
+                  <button class="btn btn-primary m-1"  data-toggle="modal" data-target="#modal-delecao">
+                    <i class="fas fa-trash"></i>
+                  </button>
               </td>
             </tr>
         </tbody>
