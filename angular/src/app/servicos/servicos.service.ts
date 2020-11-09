@@ -13,6 +13,12 @@ export class ServicosService {
   public salvar (servico:Servico) : Observable<Servico> {
     return this.http.post<Servico> (`${this.apiUrl}/api/servicos`,servico);
   }
+  public alterar (servico: Servico , id: number) : Observable<Servico> {
+    return this.http.put<Servico> (`${this.apiUrl}/api/servicos/${id}`,servico)
+  }
+  public excluir (id:number) : Observable<any> {
+    return this.http.delete<any> (`${this.apiUrl}/api/servicos/${id}`);
+  }
   public getServicos (nome: string,mes: number,flag: string) : Observable<any> {
     let httpParams = new HttpParams()
       .set("nome",(nome)?nome:"")
@@ -24,4 +30,5 @@ export class ServicosService {
   public getServicoByID(id:number) : Observable<any>{
      return this.http.get<any>(`${this.apiUrl}/api/servicos/${id}`);
   }
+
 }

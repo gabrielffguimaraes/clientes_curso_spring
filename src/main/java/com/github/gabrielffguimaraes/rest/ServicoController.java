@@ -63,4 +63,30 @@ public class ServicoController {
     ){
        return this.servicoRepository.pesquisar("%"+nome+"%",mes);
     }
+
+    @PutMapping("{id}")
+    public Servico alterarServico(@PathVariable("id") Integer id,@RequestBody @Valid ServicoDTO servicoDTO){
+        BigDecimalConverter bigDecimalConverter = new BigDecimalConverter();
+        Cliente cliente = clienteRepository.findById(servicoDTO.getIdCliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente deste Serviço não encontrado"));
+        servicoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Servico não encontrado"));
+        Servico servico = new Servico();
+        servico.setId(id);
+        servico.setCliente(cliente);
+        servico.setDescricao(servicoDTO.getDescricao());
+        servico.setValor(bigDecimalConverter.converter(servicoDTO.getValor()));
+        return servicoRepository.save(servico);
+    }
+    @DeleteMapping("{id}")
+    public void deletarServico(@PathVariable("id") Integer id) {
+        servicoRepository.findById(id)
+                .map( servico -> {
+                    servicoRepository.delete(servico);
+                    return Void.TYPE;
+                })
+                .orElseThrow(() -> {
+                   return new ResponseStatusException(HttpStatus.NOT_FOUND,"Serviço não encontrado .");
+                });
+    }
 }

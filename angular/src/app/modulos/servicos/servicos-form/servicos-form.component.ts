@@ -27,8 +27,9 @@ export class ServicosFormComponent implements OnInit {
       this.activateRoute
         .params
         .subscribe(params => {
-          //PAREI AQUI EDITAR SERVIÇO.
-          if(params['id'])
+          if(!params['id']){
+              return false;
+          }
           this.id = params['id'];
           this.servicosService
             .getServicoByID(this.id)
@@ -46,6 +47,16 @@ export class ServicosFormComponent implements OnInit {
   }
 
   public onSubmit(){
+     if(this.id){
+        this.servicosService
+        .alterar(this.servico , this.id)
+        .subscribe( response => {
+            this.sucesso = "Sucesso ao alterar Serviço !";
+        }, errors => {
+            this.errors = errors.error.errors;
+        })
+        return false;
+     }
      this.servicosService
        .salvar(this.servico)
        .subscribe( response => {
