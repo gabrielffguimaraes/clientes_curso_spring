@@ -17,10 +17,10 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true,name = "login")
+    @Column(unique = true)
     @NotEmpty(message = "{campo.username.obrigatorio}")
     private String username;
-    @Column(name = "senha")
+    @Column
     @NotEmpty(message = "{campo.password.obrigatorio}")
     private String password;
 }
