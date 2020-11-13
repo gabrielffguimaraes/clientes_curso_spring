@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/servicos")
-@CrossOrigin("*")
+/*@CrossOrigin("*")*/
 public class ServicoController {
     @Autowired
     private ClienteRepository clienteRepository;
