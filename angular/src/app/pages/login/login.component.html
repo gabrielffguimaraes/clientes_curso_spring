@@ -1,4 +1,4 @@
-<div class="layoutAuthentication">
+<div class="layoutAuthentication bg-primary">
   <div class="layoutAuthentication_content">
     <main>
       <div class="container">
@@ -11,11 +11,14 @@
                 </h3>
               </div>
               <div class="card-body">
-                <div class="alert alert-danger" *ngIf="message_login_error"> Login ou Senha Incorreta </div>
-                <form #login="ngForm" (ngSubmit)="logar()">
+                <div *ngFor="let error of message_login_error" class="alert alert-danger">
+                  {{error}}
+                </div>
+                <div class="alert alert-success" *ngIf="message_login_success != ''"> {{message_login_success}}</div>
+                <form #login="ngForm" (ngSubmit)="cadastrar_logar()">
                   <div class="form-group">
                     <label class="small mb-1">Login</label>
-                    <input type="text" name="username" class="form-control py-4"
+                    <input type="text" name="username" class="form-control py-4" autocomplete="off"
                            [(ngModel)]="username"
                            placeholder="Digite seu login"
                     >

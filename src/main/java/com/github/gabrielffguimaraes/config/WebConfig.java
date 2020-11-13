@@ -1,38 +1,42 @@
 package com.github.gabrielffguimaraes.config;
 
-import org.apache.catalina.filters.CorsFilter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.List;
-// CLASSE PARA CONFIGURAÇÃO DO CROSS ORIGIN NÃO ESTÁ FUNCIONANDO.
-//@Configuration
-public class WebConfig {
-    /*
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean(){
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-        List<String> All = Arrays.asList("*");
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
+class SimpleCorsFilter implements Filter {
 
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(All);
-        corsConfiguration.setAllowedHeaders(All);
-        corsConfiguration.setAllowedMethods(All);
-        corsConfiguration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",corsConfiguration);
-
-        CorsFilter corsFilter = new CorsFilter(source);  Linha de acordo com o curso .
-        FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>(corsFilter);
-        filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
-
-        return filter;
+    public SimpleCorsFilter() {
     }
-    */
+
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpServletResponse response = (HttpServletResponse) res;
+        HttpServletRequest request = (HttpServletRequest) req;
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization");
+
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            chain.doFilter(req, res);
+        }
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) {
+    }
+
+    @Override
+    public void destroy() {
+    }
 }

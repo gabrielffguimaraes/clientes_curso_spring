@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { Usuario } from './usuario';
+import { OauthService } from "../../servicos/oauth.service";
+import { UtilComponent } from "../../util/util.component";
 
 @Component({
   selector: 'app-login',
@@ -11,23 +14,53 @@ export class LoginComponent implements OnInit {
   public password:string;
   public c_password:string;
   public cadastro_ou_entrar:boolean = false;
-  public message_login_error:string
-  constructor(private _router:Router) { }
+  public message_login_error:string[];
+  public message_login_success:string = "";
+  public util:UtilComponent = new UtilComponent();
+  constructor(
+    private _router:Router,
+    private oauthService: OauthService
+  ) { }
 
   ngOnInit(): void {
 
   }
-  public logar() :void {
-    switch(this.cadastro_ou_entrar){
-      case this.cadastro_ou_entrar=false :
-        this._router.navigate(['/sistema'])
-        break;
-      case this.cadastro_ou_entrar=true :
-        console.log("cadastrar")
-        break;
-    }
-  }
   public preparaCadastrar() :void {
     this.cadastro_ou_entrar ? this.cadastro_ou_entrar = false : this.cadastro_ou_entrar = true ;
+  }
+  public cadastrar_logar():void {
+    let usuario: Usuario = new Usuario();
+    usuario.username = this.username;
+    usuario.password = this.password;
+
+    switch (this.cadastro_ou_entrar) {
+       case false :
+         this.
+           oauthService.
+           realizarLogin(usuario).subscribe(
+             sucesso => {
+                this._router.navigate(['/sistema'])
+             }, error => {
+
+             }
+           );
+         break;
+       case true :
+         this.message_login_error = [];
+         this.message_login_success = "";
+         this.
+         oauthService.
+         salvar(usuario).
+         subscribe(sucesso => {
+           this.username = '';
+           this.password = '';
+           this.c_password = '';
+           this.message_login_success = "Cadastro efetuado com sucesso , Realize o login";
+         },
+         errors => {
+           this.message_login_error = errors.error.errors;
+         })
+         break;
+     }
   }
 }

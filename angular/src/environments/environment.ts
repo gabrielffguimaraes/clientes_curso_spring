@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl:"http://localhost:8080/clientes"
+  apiUrl:"http://localhost:8080/clientes",
+  path_context_usuarios:"/api/usuarios",
+  path_context_clientes:"/api/clientes",
+  path_context_servicos:"/api/servicos",
+  path_context_oauth:"/oauth/token",
+  client_id:"my-angular-app",
+  client_secret:"@321"
 };
 /*
  * For easier debugging in development mode, you can import the following file

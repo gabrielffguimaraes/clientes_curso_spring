@@ -18,4 +18,13 @@ export class UtilComponent implements OnInit {
     return formattedDate;
   }
 
+  public errorTratament(errors : string) : string {
+      const erro = errors.
+                      replace(/["]/g,"").
+                      replace("400 BAD_REQUEST","");
+      return erro;
+  }
+
+
+
 }
