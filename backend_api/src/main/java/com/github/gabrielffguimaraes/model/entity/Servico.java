@@ -2,6 +2,7 @@ package com.github.gabrielffguimaraes.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@EnableAutoConfiguration
 public class Servico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,7 +9,7 @@ import { OauthService } from "../../../servicos/oauth.service";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private _router:Router,private oauthService:OauthService) { }
+  constructor(private _router:Router,public oauthService:OauthService) { }
 
   ngOnInit(): void {
   }
