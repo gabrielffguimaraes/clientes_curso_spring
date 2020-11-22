@@ -1,5 +1,4 @@
 # ordem_de_servicos
-Desenvolvimento de uma aplicação spring boot ,ordem de servico , utilizando design de Api's Restful , patterns como mvc , dto etc. e autenticação por meio de tokens Jwt e oauth e no frontend angular .
 
 Para iniciar é necessário ter o angular,spring boot, e o mysql instalado .
 
