@@ -1,0 +1,90 @@
+<h1 class="mt-4">Serviços</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active" style="width: 100%">
+    	<form #servico="ngForm" (ngSubmit)="pesquisar()">
+         <div class="row">
+            <div class="col-12 mb-2 mb-md-0 col-md-8">
+              <input type="text" [(ngModel)]="nome" name="nome" class="form-control" placeholder="Pesquisar Serviço"/>
+            </div>
+            <div class="col-12 mb-2  mb-md-0 col-md-2">
+              <select type="text" [(ngModel)]="mes" name="mes" class="form-control">
+                 <option *ngFor="let mes of meses" [ngValue]="mes">{{mesesDescricao[mes]}}</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-2">
+              <button class="btn btn-primary form-control">
+                  <i class="fa fa-search"></i>
+                  Pesquisar
+              </button>
+            </div>
+         </div>
+      </form>
+    </li>
+</ol>
+<div class="row mb-4">
+	<div class="col-md-2">
+		<button routerLink="/sistema/servicos/form" class="btn btn-warning" style="color:white">
+			<i class="fa fa-plus"></i> Novo
+		</button>
+	</div>
+</div>
+<br/>
+
+<div class="table-responsive">
+    <div *ngFor="let error of errors" class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+    <div *ngIf="msg_success == true" class="alert alert-success" role="alert">
+        Excluido .
+    </div>
+    <div *ngIf="msg == true" class="alert alert-warning" role="alert">
+      <i class="fas fa-sad-cry" style="font-size:25px;"></i> Nenhum registro Encontrado .
+    </div>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Cliente</th>
+              <th>Data Cadastro</th>
+              <th style="text-align: center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let servico of servicos">
+              <td>{{servico.descricao}}</td>
+              <td>{{servico.valor.toLocaleString('pt-Br',{style:'currency',currency:'BRL'})}}</td>
+              <td>{{servico.cliente.nome}}</td>
+              <td>{{servico.dataCadastro}}</td>
+              <td style="width: 125px">
+                  <button routerLink="/sistema/servicos/form/{{servico.id}}" class="btn btn-primary m-1">
+                    <i class="far fa-edit"></i>
+                  </button>
+                  <button class="btn btn-primary m-1"  (click)="this.id_selecionado=servico.id" data-toggle="modal" data-target="#modal-delecao">
+                    <i class="fas fa-trash"></i>
+                  </button>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div id="modal-delecao" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Deseja realmente excluir este <b>Serviço </b>  ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="excluirServico()" focused class="btn btn-success" data-dismiss="modal">SIM</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">NÃO</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
