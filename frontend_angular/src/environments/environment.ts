@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:"http://localhost:8080",
+  apiUrl:"https://ordem-de-servico-br.herokuapp.com",
   path_context_usuarios:"/api/usuarios",
   path_context_clientes:"/api/clientes",
   path_context_servicos:"/api/servicos",
